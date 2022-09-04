@@ -1,0 +1,250 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
+  font-family: "Goldman", cursive;
+}
+
+:root {
+  --primary: #e60012;
+  --secondary: #fff;
+  --black: #000;
+}
+
+/* NAV DE LA PAGINA ///////////////////////////////////////////////////////////////////////////////////*/
+
+nav {
+  width: 100%;
+  height: 10vh;
+  background-color: var(--primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
+.logo {
+  width: 5.6rem;
+  height: 5.6rem;
+  margin-left: 1rem;
+}
+
+.title {
+  color: var(--secondary);
+  font-size: 4rem;
+}
+
+.title2 {
+  color: var(--black);
+}
+
+.carrito {
+  color: var(--secondary);
+  font-size: 3rem;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+/* HERO IMG //////////////////////////////////////////////////////////////////////////////////////////*/
+
+.hero {
+  width: 100%;
+  height: 90vh;
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* SECCION NOVEDADES /////////////////////////////////////////////////////////////////////////////*/
+
+.news {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.news h2 {
+  text-align: center;
+}
+
+.title-news {
+  font-size: 3rem;
+  text-align: center;
+  padding-top: 4rem;
+}
+
+/* SECCION OFERTA /////////////////////////////////////////////////////////////////////////////*/
+
+.offer {
+  width: 100%;
+  height: 30vh;
+  background-color: var(--primary);
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: 40% 60%;
+  grid-template-rows: 30vh;
+}
+
+.offer-img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.offer-img img {
+  width: 380px;
+  height: auto;
+}
+
+.offer-text {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.offer-text h3 {
+  font-size: 2.5rem;
+  text-align: center;
+  color: var(--secondary);
+  padding-right: 4rem;
+}
+
+/* SECCION PRODUCTOS //////////////////////////////////////////////////////////////////////////*/
+
+.title-products {
+  font-size: 3rem;
+  text-align: center;
+  padding: 4rem;
+}
+
+.products h2 {
+  text-align: center;
+}
+
+/* PIE DE PAGINA  ////////////////////////////////////////////////////////////////////////////*/
+
+footer {
+  width: 100%;
+  height: 220px;
+  margin-top: 5rem;
+  background-color: var(--primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+}
+
+footer p {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  color: var(--secondary);
+}
+
+.social {
+  width: 18rem;
+  height: auto;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.social img {
+  width: 5rem;
+  padding: 1rem;
+  filter: brightness(10);
+}
+
+.copy {
+  font-size: 1rem;
+}
+
+/* MEDIA QUERYS ///////////////////////////////////////////////////////////////////////////////*/
+
+@media (max-width: 1000px) {
+  .offer-img img {
+    width: 280px;
+    height: auto;
+  }
+
+  .offer-text h3 {
+    font-size: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (max-width: 850px) {
+  .title {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  .logo {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .carrito {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .offer-img img {
+    width: 200px;
+    height: auto;
+  }
+
+  .offer-text h3 {
+    font-size: 1.5rem;
+    padding: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .logo {
+    width: 4rem;
+    height: 4rem;
+    margin: 0;
+  }
+
+  .carrito {
+    width: 4.1rem;
+    height: 4.1rem;
+    margin: 0;
+  }
+
+  .title-news {
+    font-size: 1.5rem;
+  }
+
+  .offer {
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .title-products {
+    font-size: 1.5rem;
+  }
+}
