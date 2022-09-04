@@ -85,8 +85,12 @@ function eliminarCarrito(id, carrito) {
     if (existe) {
       let item = carrito.find((obj) => obj.id === id);
       let index = carrito.indexOf(item);
-      carrito.splice(index, 1);
-      cortarWhile = 0;
+      if (item.cantidad > 1) {
+        item.cantidad--;
+      } else {
+        carrito.splice(index, 1);
+        cortarWhile = 0;
+      }
     } else {
       alert("ID inexistente en el carrito, porfavor seleccione un ID adecuada");
       id = prompt("Ingrese el ID del producto que desee Eliminar del carrito");
