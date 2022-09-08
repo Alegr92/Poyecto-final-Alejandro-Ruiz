@@ -1,3 +1,4 @@
+let seccionNews = document.querySelector(".news");
 let total = 0;
 let opcion = 0;
 let carrito = [];
@@ -36,11 +37,12 @@ function validarMenu(opcion) {
     opcion !== "2" &&
     opcion !== "3" &&
     opcion !== "4" &&
+    opcion !== "5" &&
     opcion !== "0"
   ) {
     alert("Opcion no valida, ingrese nuevamente");
     opcion = prompt(
-      "Ingrese una opcion\n1-Mostrar Productos\n2-Agregar un producto al carrito\n3-Eliminar un producto del carrito\n4-Realizar compra\n0-Salir\n\nPorfavor recuerde el ID del producto que desee comprar"
+      "Ingrese una opcion\n1-Mostrar Productos\n2-Agregar un producto al carrito\n3-Eliminar un producto del carrito\n4-Mostrar carrito\n5-Realizar compra\n0-Salir\n\nPorfavor recuerde el ID del producto que desee comprar"
     );
   }
   return opcion;
@@ -49,11 +51,13 @@ function validarMenu(opcion) {
 function mostrarProductos(products) {
   let vista = [];
   products.forEach((obj) => {
-    vista.push(
-      "ID:" + obj.id + " " + obj.titulo + " " + "Precio:" + obj.precio
-    );
+    vista.push(`ID: ${obj.id}  ${obj.titulo}  ${obj.precio}`);
   });
-  alert(vista[0] + "\n" + vista[1] + "\n" + vista[2] + "\n" + vista[3]);
+  alert(`
+  ${vista[0]}
+  ${vista[1]}
+  ${vista[2]}
+  ${vista[3]}`);
 }
 
 function validarId(id) {
@@ -78,7 +82,7 @@ function agregarProducto(products, carrito, id) {
   }
 }
 
-function eliminarCarrito(id, carrito) {
+function eliminarProducto(id, carrito) {
   let cortarWhile = 1;
   while (cortarWhile != 0) {
     let existe = carrito.some((obj) => obj.id === id);
@@ -87,6 +91,7 @@ function eliminarCarrito(id, carrito) {
       let index = carrito.indexOf(item);
       if (item.cantidad > 1) {
         item.cantidad--;
+        cortarWhile = 0;
       } else {
         carrito.splice(index, 1);
         cortarWhile = 0;
@@ -98,18 +103,43 @@ function eliminarCarrito(id, carrito) {
   }
 }
 
-function mostrarCompra(carrito) {
+function mostrarCarrito(carrito) {
   carrito.forEach((obj) => {
     alert(
-      obj.titulo +
-        " Precio unitario: " +
-        obj.precio +
-        " Sub total: " +
+      `El carrito actualmente contiene: ${obj.titulo}  ${obj.precio}  cantidad ${obj.cantidad}`
+    );
+  });
+}
+
+function realizarCompra(carrito) {
+  carrito.forEach((obj) => {
+    alert(
+      `${obj.titulo} Precio unitario: ${obj.precio}  Sub total: ${
         obj.precio * obj.cantidad
+      }`
     );
     total += obj.precio * obj.cantidad;
   });
-  alert("El total a pagar es de: " + total + "\nGracias por su compra!");
+  alert(`
+  El total a pagar es de ${total}
+  Gracias por su compra`);
+  return total;
+}
+
+function mostrarEnDom(carrito, total) {
+  let div = document.createElement("div");
+  carrito.forEach((el) => {
+    let p = document.createElement("p");
+    p.innerText = `${el.titulo} precio ${el.precio} cantidad ${el.cantidad}`;
+    div.append(p);
+  });
+  let p = document.createElement("p");
+  p.innerText = `El total a pagar es: ${total}`;
+
+  if (total !== 0) {
+    div.append(p);
+    seccionNews.append(div);
+  }
 }
 
 // EJECUCION DEL SCRIPT//////////////////////////////////////////////////////////////////////////////////////////
@@ -120,7 +150,7 @@ alert(
 
 do {
   opcion = prompt(
-    "Ingrese una opcion\n1-Mostrar Productos\n2-Agregar un producto al carrito\n3-Eliminar un producto del carrito\n4-Realizar compra\n0-Salir\n\nPorfavor recuerde el ID del producto que desee comprar"
+    "Ingrese una opcion\n1-Mostrar Productos\n2-Agregar un producto al carrito\n3-Eliminar un producto del carrito\n4-Mostrar carrito\n5-Realizar compra\n0-Salir\n\nPorfavor recuerde el ID del producto que desee comprar"
   );
   opcion = validarMenu(opcion);
 
@@ -142,7 +172,7 @@ do {
         let id = prompt(
           "Ingrese el ID del producto que desee eliminar del carrito"
         );
-        eliminarCarrito(id, carrito);
+        eliminarProducto(id, carrito);
         console.table(carrito);
       }
       break;
@@ -150,7 +180,14 @@ do {
       if (carrito.length === 0) {
         alert("El carrito esta vacio , primero agregue un producto");
       } else {
-        mostrarCompra(carrito);
+        mostrarCarrito(carrito);
+      }
+      break;
+    case "5":
+      if (carrito.length === 0) {
+        alert("El carrito esta vacio , primero agregue un producto");
+      } else {
+        total = realizarCompra(carrito);
         opcion = 0;
       }
       break;
@@ -159,3 +196,5 @@ do {
       break;
   }
 } while (opcion != 0);
+
+mostrarEnDom(carrito, total);

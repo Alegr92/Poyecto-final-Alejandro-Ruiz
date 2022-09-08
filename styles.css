@@ -84,6 +84,16 @@ nav {
   padding-top: 4rem;
 }
 
+.news p {
+  font-size: 2rem;
+  text-align: center;
+  border: thin solid var(--black);
+}
+
+.news div {
+  margin: 3rem;
+}
+
 /* SECCION OFERTA /////////////////////////////////////////////////////////////////////////////*/
 
 .offer {
