@@ -1,4 +1,6 @@
-let seccionNews = document.querySelector(".news");
+let modalContainer = document.querySelector(".modal-container");
+let modalWindow = document.querySelector(".modal");
+let button = document.querySelector(".buy");
 let total = 0;
 let opcion = 0;
 let carrito = [];
@@ -138,7 +140,7 @@ function mostrarEnDom(carrito, total) {
 
   if (total !== 0) {
     div.append(p);
-    seccionNews.append(div);
+    modalWindow.insertAdjacentElement("afterbegin", div);
   }
 }
 
@@ -198,3 +200,21 @@ do {
 } while (opcion != 0);
 
 mostrarEnDom(carrito, total);
+
+button.addEventListener("click", (e) => {
+  if (total !== 0) {
+    modalWindow.classList.add("slide-in-bck-top");
+    modalContainer.classList.remove("visible");
+    setTimeout(() => {
+      modalContainer.classList.add("visible");
+    }, 2500);
+  } else {
+    modalWindow.classList.add("slide-in-bck-top");
+    modalContainer.classList.remove("visible");
+    modalWindow.innerHTML = `<h2>Usted aun no compro nada, realize una compra porfavor</h2>
+    <img class="accept" src="./assets/error-svgrepo-com.svg" alt="">`;
+    setTimeout(() => {
+      modalContainer.classList.add("visible");
+    }, 2500);
+  }
+});
